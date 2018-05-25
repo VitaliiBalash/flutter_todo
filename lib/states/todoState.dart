@@ -1,7 +1,16 @@
 import 'dart:core';
 
 class ToDoState {
-  final List<ToDo> todoList = new List<ToDo>();
+  final List<ToDo> todoList;
+
+  ToDoState({List<ToDo> todoList})
+      : this.todoList = todoList ?? new List<ToDo>();
+
+  ToDoState addToDo(String task) {
+    final newToDoList = this.todoList.toList();
+    newToDoList.add(new ToDo(task));
+    return ToDoState(todoList: newToDoList);
+  }
 }
 
 class ToDo {

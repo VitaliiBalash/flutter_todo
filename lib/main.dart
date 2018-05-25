@@ -20,7 +20,7 @@ class ReduxApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new StoreProvider(
+    return new StoreProvider<AppState>(
       store: store,
       child: new MaterialApp(
         title: "ToDo",
@@ -29,12 +29,7 @@ class ReduxApp extends StatelessWidget {
         ),
         routes: {
           ToDoAppRoutes.inbox: (context) {
-            return new StoreBuilder<AppState>(
-//              onInit: (store) => store.dispatch(new LoadTodosAction()),
-              builder: (context, store) {
-                return new InboxPage();
-              },
-            );
+            return new InboxPage();
           },
         },
       ),
