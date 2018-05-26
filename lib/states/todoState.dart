@@ -6,6 +6,12 @@ class ToDoState {
   ToDoState({List<ToDo> todoList})
       : this.todoList = todoList ?? new List<ToDo>();
 
+  ToDoState copyWith({List<ToDo> todoList}) {
+    return ToDoState(
+      todoList: todoList ?? this.todoList,
+    );
+  }
+
   ToDoState addToDo(String task) {
     final newToDoList = this.todoList.toList();
     newToDoList.add(new ToDo(task));

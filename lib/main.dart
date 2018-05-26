@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import "package:flutter_todo/pages/inboxPage.dart";
-import 'package:flutter_todo/reducers/appReducer.dart';
 import 'package:flutter_todo/routes.dart';
 import 'package:flutter_todo/states/addState.dart';
-import 'package:redux/redux.dart';
+import 'package:flutter_todo/store.dart';
 
 void main() {
   runApp(new ReduxApp());
 }
 
 class ReduxApp extends StatelessWidget {
-  final store = new Store<AppState>(
-    appReducer,
-    initialState: new AppState(),
-  );
-
   ReduxApp();
 
   @override

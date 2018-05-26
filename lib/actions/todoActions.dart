@@ -6,6 +6,12 @@ class ToDoActionComplete {
   ToDoActionComplete(this.id);
 }
 
+class ToDoActionDelete {
+  final int id;
+
+  ToDoActionDelete(this.id);
+}
+
 class ToDoActionCreate {
   final String task;
 
