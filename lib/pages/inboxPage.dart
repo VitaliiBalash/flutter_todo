@@ -37,8 +37,9 @@ class InboxPage extends StatelessWidget {
     );
   }
 
-  Widget _buildListItem(ToDo todo) => new Dismissible(
-      key: key,
+  Widget _buildListItem(ToDo todo) {
+    return new Dismissible(
+      key: new Key(todo.id.toString()),
       child: new ListTile(title: new Text(todo.task)),
       background: new Container(
         color: Colors.green,
@@ -52,15 +53,19 @@ class InboxPage extends StatelessWidget {
         padding: const EdgeInsets.only(right: 16.0),
         child: new Icon(Icons.delete, color: Colors.white),
       ),
-      onDismissed: (direction) {
-        switch (direction) {
-          case DismissDirection.startToEnd:
-            store.dispatch(new ToDoActionComplete(todo.id));
-            break;
-          case DismissDirection.endToStart:
-            store.dispatch(new ToDoActionDelete(todo.id));
-            break;
-          default:
-        }
-      });
+      onDismissed: (direction) => _handleDismiss(todo.id, direction),
+    );
+  }
+
+  _handleDismiss(int todoId, DismissDirection direction) {
+    switch (direction) {
+      case DismissDirection.startToEnd:
+        store.dispatch(new ToDoActionComplete(todoId));
+        break;
+      case DismissDirection.endToStart:
+        store.dispatch(new ToDoActionDelete(todoId));
+        break;
+      default:
+    }
+  }
 }
