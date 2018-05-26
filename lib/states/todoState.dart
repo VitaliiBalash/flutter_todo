@@ -11,12 +11,6 @@ class ToDoState {
       todoList: todoList ?? this.todoList,
     );
   }
-
-  ToDoState addToDo(String task) {
-    final newToDoList = this.todoList.toList();
-    newToDoList.add(new ToDo(task));
-    return ToDoState(todoList: newToDoList);
-  }
 }
 
 class ToDo {
