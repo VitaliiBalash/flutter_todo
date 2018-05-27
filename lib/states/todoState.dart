@@ -6,7 +6,7 @@ class ToDoState {
   ToDoState({List<ToDo> todoList})
       : this.todoList = todoList ?? new List<ToDo>();
 
-  ToDoState copyWith({List<ToDo> todoList}) {
+  ToDoState cloneWith({List<ToDo> todoList}) {
     return ToDoState(
       todoList: todoList ?? this.todoList,
     );
@@ -22,7 +22,7 @@ class ToDo {
       : this.id = id ?? _generateRandomId(),
         this.completed = completed ?? false;
 
-  ToDo copyWith({int id, String task, bool completed}) {
+  ToDo cloneWith({int id, String task, bool completed}) {
     return new ToDo(
       task ?? this.task,
       id: id ?? this.id,

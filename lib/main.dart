@@ -34,12 +34,13 @@ class ReduxApp extends StatelessWidget {
           switch (settings.name) {
             case ToDoAppRoutes.inbox:
               return new MyCustomRoute(
-                builder: (_) => new MainPage("Inbox", new InboxPage()),
+                builder: (_) => new MainPage("Inbox", new InboxPage(), true),
                 settings: settings,
               );
             case ToDoAppRoutes.completed:
               return new MyCustomRoute(
-                builder: (_) => new MainPage("Completed", new CompletedPage()),
+                builder: (_) =>
+                    new MainPage("Completed", new CompletedPage(), false),
                 settings: settings,
               );
           }

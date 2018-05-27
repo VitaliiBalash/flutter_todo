@@ -14,7 +14,7 @@ ToDoState todoReducer(ToDoState oldState, dynamic action) {
 }
 
 ToDoState _handleActionCreate(ToDoState oldState, ToDoActionCreate action) {
-  return oldState.copyWith(
+  return oldState.cloneWith(
     todoList: oldState.todoList.toList()..add(new ToDo(action.task)),
   );
 }
@@ -23,13 +23,13 @@ ToDoState _handleActionComplete(ToDoState oldState, ToDoActionComplete action) {
   final newToDoList = oldState.todoList.toList();
   final elementIndex = newToDoList.indexWhere((item) => item.id == action.id);
   newToDoList[elementIndex] =
-      newToDoList[elementIndex].copyWith(completed: true);
-  return oldState.copyWith(todoList: newToDoList);
+      newToDoList[elementIndex].cloneWith(completed: true);
+  return oldState.cloneWith(todoList: newToDoList);
 }
 
 ToDoState _handleActionDelete(ToDoState oldState, ToDoActionDelete action) {
   final newToDoList = oldState.todoList.toList();
   final elementIndex = newToDoList.indexWhere((item) => item.id == action.id);
   newToDoList.removeAt(elementIndex);
-  return oldState.copyWith(todoList: newToDoList);
+  return oldState.cloneWith(todoList: newToDoList);
 }

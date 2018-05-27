@@ -4,27 +4,30 @@ import 'package:flutter_todo/routes.dart';
 import 'package:flutter_todo/store.dart';
 
 class MainPage extends StatelessWidget {
-  final String title;
-  final Widget body;
+  final String _title;
+  final Widget _body;
+  final bool _showFAB;
 
-  MainPage(this.title, this.body);
+  MainPage(this._title, this._body, this._showFAB);
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text(title),
+        title: new Text(_title),
       ),
-      body: body,
+      body: _body,
       floatingActionButton: _floatingActionButton(),
       drawer: _drawer(context),
     );
   }
 
-  Widget _floatingActionButton() => new FloatingActionButton(
-        onPressed: () => store.dispatch(new ToDoActionCreate("Task")),
-        child: new Icon(Icons.add),
-      );
+  Widget _floatingActionButton() => _showFAB
+      ? new FloatingActionButton(
+          onPressed: () => store.dispatch(new ToDoActionCreate("Task")),
+          child: new Icon(Icons.add),
+        )
+      : null;
 
   Widget _drawer(BuildContext context) => new Drawer(
         child: new ListView(
