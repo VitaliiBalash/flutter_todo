@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/routes.dart';
+import 'package:flutter_todo/widgets/appDrawer.dart';
 
 class MainPage extends StatelessWidget {
   final String _title;
@@ -14,7 +15,7 @@ class MainPage extends StatelessWidget {
       appBar: new AppBar(title: new Text(_title)),
       body: _body,
       floatingActionButton: _floatingActionButton(context),
-      drawer: _drawer(context),
+      drawer: new AppDrawer(),
     );
   }
 
@@ -24,26 +25,4 @@ class MainPage extends StatelessWidget {
           child: new Icon(Icons.add),
         )
       : null;
-
-  Widget _drawer(BuildContext context) => new Drawer(
-        child: new ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            new DrawerHeader(
-              child: new Text("ToDo"),
-              decoration: new BoxDecoration(color: Colors.blue),
-            ),
-            new ListTile(
-              title: new Text("Inbox"),
-              onTap: () =>
-                  Navigator.popAndPushNamed(context, ToDoAppRoutes.inbox),
-            ),
-            new ListTile(
-              title: new Text("Completed"),
-              onTap: () =>
-                  Navigator.popAndPushNamed(context, ToDoAppRoutes.completed),
-            ),
-          ],
-        ),
-      );
 }
