@@ -1,3 +1,4 @@
 class ToDoAppRoutes {
-  static final inbox = "/";
+  static const inbox = "/";
+  static const completed = "/completed";
 }

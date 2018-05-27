@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import "package:flutter_todo/pages/completedPage.dart";
 import "package:flutter_todo/pages/inboxPage.dart";
+import "package:flutter_todo/pages/mainPage.dart";
 import 'package:flutter_todo/routes.dart';
 import 'package:flutter_todo/states/addState.dart';
 import 'package:flutter_todo/store.dart';
@@ -21,12 +23,44 @@ class ReduxApp extends StatelessWidget {
         theme: new ThemeData(
           primarySwatch: Colors.blue,
         ),
-        routes: {
-          ToDoAppRoutes.inbox: (context) {
-            return new InboxPage();
-          },
+        initialRoute: ToDoAppRoutes.inbox,
+//        routes: {
+//          ToDoAppRoutes.inbox: (context) =>
+//              new MainPage("Inbox", new InboxPage()),
+//          ToDoAppRoutes.completed: (context) =>
+//              new MainPage("Completed", new CompletedPage()),
+//        },
+        onGenerateRoute: (RouteSettings settings) {
+          switch (settings.name) {
+            case ToDoAppRoutes.inbox:
+              return new MyCustomRoute(
+                builder: (_) => new MainPage("Inbox", new InboxPage()),
+                settings: settings,
+              );
+            case ToDoAppRoutes.completed:
+              return new MyCustomRoute(
+                builder: (_) => new MainPage("Completed", new CompletedPage()),
+                settings: settings,
+              );
+          }
+          assert(false);
         },
       ),
     );
+  }
+}
+
+class MyCustomRoute<T> extends MaterialPageRoute<T> {
+  MyCustomRoute({WidgetBuilder builder, RouteSettings settings})
+      : super(builder: builder, settings: settings);
+
+  @override
+  Widget buildTransitions(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return child;
   }
 }

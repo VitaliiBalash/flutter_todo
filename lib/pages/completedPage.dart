@@ -5,7 +5,7 @@ import 'package:flutter_todo/states/addState.dart';
 import 'package:flutter_todo/states/todoState.dart';
 import 'package:flutter_todo/store.dart';
 
-class InboxPage extends StatelessWidget {
+class CompletedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new StoreConnector<AppState, List<ToDo>>(
@@ -18,7 +18,7 @@ class InboxPage extends StatelessWidget {
       },
       converter: (store) {
         return store.state.todoState.todoList
-            .where((todo) => !todo.completed)
+            .where((todo) => todo.completed)
             .toList();
       },
     );
@@ -28,13 +28,8 @@ class InboxPage extends StatelessWidget {
     return new Dismissible(
       key: new Key(todo.id.toString()),
       child: new ListTile(title: new Text(todo.task)),
+      direction: DismissDirection.endToStart,
       background: new Container(
-        color: Colors.green,
-        alignment: new Alignment(-1.0, 0.0),
-        padding: const EdgeInsets.only(left: 16.0),
-        child: new Icon(Icons.done, color: Colors.white),
-      ),
-      secondaryBackground: new Container(
         color: Colors.red,
         alignment: new Alignment(1.0, 0.0),
         padding: const EdgeInsets.only(right: 16.0),
@@ -46,9 +41,6 @@ class InboxPage extends StatelessWidget {
 
   _handleDismiss(int todoId, DismissDirection direction) {
     switch (direction) {
-      case DismissDirection.startToEnd:
-        store.dispatch(new ToDoActionComplete(todoId));
-        break;
       case DismissDirection.endToStart:
         store.dispatch(new ToDoActionDelete(todoId));
         break;
