@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/actions/todoActions.dart';
 import 'package:flutter_todo/routes.dart';
-import 'package:flutter_todo/store.dart';
 
 class MainPage extends StatelessWidget {
   final String _title;
@@ -13,18 +11,16 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(_title),
-      ),
+      appBar: new AppBar(title: new Text(_title)),
       body: _body,
-      floatingActionButton: _floatingActionButton(),
+      floatingActionButton: _floatingActionButton(context),
       drawer: _drawer(context),
     );
   }
 
-  Widget _floatingActionButton() => _showFAB
+  Widget _floatingActionButton(BuildContext context) => _showFAB
       ? new FloatingActionButton(
-          onPressed: () => store.dispatch(new ToDoActionCreate("Task")),
+          onPressed: () => Navigator.pushNamed(context, ToDoAppRoutes.create),
           child: new Icon(Icons.add),
         )
       : null;

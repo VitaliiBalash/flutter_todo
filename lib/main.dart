@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import "package:flutter_todo/pages/completedPage.dart";
+import "package:flutter_todo/pages/createEditPage.dart";
 import "package:flutter_todo/pages/inboxPage.dart";
 import "package:flutter_todo/pages/mainPage.dart";
 import 'package:flutter_todo/routes.dart';
@@ -41,6 +42,11 @@ class ReduxApp extends StatelessWidget {
               return new MyCustomRoute(
                 builder: (_) =>
                     new MainPage("Completed", new CompletedPage(), false),
+                settings: settings,
+              );
+            case ToDoAppRoutes.create:
+              return MaterialPageRoute(
+                builder: (_) => new CreateEditPage(),
                 settings: settings,
               );
           }
