@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_todo/actions/todoActions.dart';
-import 'package:flutter_todo/states/addState.dart';
+import 'package:flutter_todo/states/appState.dart';
 import 'package:flutter_todo/states/todoState.dart';
 import 'package:flutter_todo/store.dart';
 

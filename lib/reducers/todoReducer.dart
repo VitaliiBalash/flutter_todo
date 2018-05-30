@@ -1,17 +1,12 @@
 import 'package:flutter_todo/actions/todoActions.dart';
 import 'package:flutter_todo/states/todoState.dart';
+import 'package:redux/redux.dart';
 
-ToDoState todoReducer(ToDoState oldState, dynamic action) {
-  ToDoState newState = oldState;
-  if (action is ToDoActionCreate) {
-    newState = _handleActionCreate(oldState, action);
-  } else if (action is ToDoActionComplete) {
-    newState = _handleActionComplete(oldState, action);
-  } else if (action is ToDoActionDelete) {
-    newState = _handleActionDelete(oldState, action);
-  }
-  return newState;
-}
+Reducer<ToDoState> todoReducer = combineReducers<ToDoState>([
+  new TypedReducer<ToDoState, ToDoActionCreate>(_handleActionCreate),
+  new TypedReducer<ToDoState, ToDoActionComplete>(_handleActionComplete),
+  new TypedReducer<ToDoState, ToDoActionDelete>(_handleActionDelete),
+]);
 
 ToDoState _handleActionCreate(ToDoState oldState, ToDoActionCreate action) {
   return oldState.cloneWith(
